@@ -1227,12 +1227,12 @@ func (ls *LState) ToThread(n int) *LState {
 
 /* error & debug operations {{{ */
 
-// This function is equivalent to luaL_error( http://www.lua.org/manual/5.1/manual.html#luaL_error ).
+// RaiseError is equivalent to luaL_error( http://www.lua.org/manual/5.1/manual.html#luaL_error ).
 func (ls *LState) RaiseError(format string, args ...interface{}) {
 	ls.raiseError(1, format, args...)
 }
 
-// This function is equivalent to lua_error( http://www.lua.org/manual/5.1/manual.html#lua_error ).
+// Error is equivalent to lua_error( http://www.lua.org/manual/5.1/manual.html#lua_error ).
 func (ls *LState) Error(lv LValue, level int) {
 	if str, ok := lv.(LString); ok {
 		ls.raiseError(level, string(str))
@@ -1737,7 +1737,7 @@ func (ls *LState) XMoveTo(other *LState, n int) {
 
 /* GopherLua original APIs {{{ */
 
-// Set maximum memory size. This function can only be called from the main thread.
+// SetMx; Set maximum memory size. This function can only be called from the main thread.
 func (ls *LState) SetMx(mx int) {
 	if ls.Parent != nil {
 		ls.RaiseError("sub threads are not allowed to set a memory limit")
@@ -1775,7 +1775,7 @@ func (ls *LState) RemoveContext() context.Context {
 	return oldctx
 }
 
-// Converts the Lua value at the given acceptable index to the chan LValue.
+// ToChannel converts the Lua value at the given acceptable index to the chan LValue.
 func (ls *LState) ToChannel(n int) chan LValue {
 	if lv, ok := ls.Get(n).(LChannel); ok {
 		return (chan LValue)(lv)

@@ -119,7 +119,7 @@ Available options are:
 	return status
 }
 
-// do read/eval/print/loop
+// doREPL; do read/eval/print/loop
 func doREPL(L *lua.LState) {
 	rl, err := readline.New("> ")
 	if err != nil {

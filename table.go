@@ -281,7 +281,7 @@ func (tb *LTable) RawGetInt(key int) LValue {
 	return tb.array[index]
 }
 
-// RawGet returns an LValue associated with a given key without __index metamethod.
+// RawGetH returns an LValue associated with a given key without __index metamethod.
 func (tb *LTable) RawGetH(key LValue) LValue {
 	if s, sok := key.(LString); sok {
 		if tb.strdict == nil {
@@ -337,7 +337,7 @@ func (tb *LTable) ForEach(cb func(LValue, LValue)) {
 	}
 }
 
-// This function is equivalent to lua_next ( http://www.lua.org/manual/5.1/manual.html#lua_next ).
+// Next is equivalent to lua_next ( http://www.lua.org/manual/5.1/manual.html#lua_next ).
 func (tb *LTable) Next(key LValue) (LValue, LValue) {
 	init := false
 	if key == LNil {

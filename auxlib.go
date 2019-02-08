@@ -421,7 +421,7 @@ func (ls *LState) ToStringMeta(lv LValue) LValue {
 	}
 }
 
-// Set a module loader to the package.preload table.
+// PreloadModule; Set a module loader to the package.preload table.
 func (ls *LState) PreloadModule(name string, loader LGFunction) {
 	preload := ls.GetField(ls.GetField(ls.Get(EnvironIndex), "package"), "preload")
 	if _, ok := preload.(*LTable); !ok {
@@ -430,7 +430,7 @@ func (ls *LState) PreloadModule(name string, loader LGFunction) {
 	ls.SetField(preload, name, ls.NewFunction(loader))
 }
 
-// Checks whether the given index is an LChannel and returns this channel.
+// CheckChannel checks whether the given index is an LChannel and returns this channel.
 func (ls *LState) CheckChannel(n int) chan LValue {
 	v := ls.Get(n)
 	if ch, ok := v.(LChannel); ok {
@@ -440,7 +440,7 @@ func (ls *LState) CheckChannel(n int) chan LValue {
 	return nil
 }
 
-// If the given index is a LChannel, returns this channel. If this argument is absent or is nil, returns ch. Otherwise, raises an error.
+// OptChannel; If the given index is a LChannel, returns this channel. If this argument is absent or is nil, returns ch. Otherwise, raises an error.
 func (ls *LState) OptChannel(n int, ch chan LValue) chan LValue {
 	v := ls.Get(n)
 	if v == LNil {

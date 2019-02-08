@@ -40,7 +40,7 @@ type LValue interface {
 // LVIsFalse returns true if a given LValue is a nil or false otherwise false.
 func LVIsFalse(v LValue) bool { return v == LNil || v == LFalse }
 
-// LVIsFalse returns false if a given LValue is a nil or false otherwise true.
+// LVAsBool returns false if a given LValue is a nil or false otherwise true.
 func LVAsBool(v LValue) bool { return v != LNil && v != LFalse }
 
 // LVAsString returns string representation of a given LValue
@@ -112,7 +112,7 @@ func (st LString) assertFloat64() (float64, bool)     { return 0, false }
 func (st LString) assertString() (string, bool)       { return string(st), true }
 func (st LString) assertFunction() (*LFunction, bool) { return nil, false }
 
-// fmt.Formatter interface
+// Format; interface
 func (st LString) Format(f fmt.State, c rune) {
 	switch c {
 	case 'd', 'i':
@@ -138,7 +138,7 @@ func (nm LNumber) assertFloat64() (float64, bool)     { return float64(nm), true
 func (nm LNumber) assertString() (string, bool)       { return "", false }
 func (nm LNumber) assertFunction() (*LFunction, bool) { return nil, false }
 
-// fmt.Formatter interface
+// Format; interface
 func (nm LNumber) Format(f fmt.State, c rune) {
 	switch c {
 	case 'q', 's':

@@ -522,7 +522,7 @@ func compilePattern(p pattern, ps ...*iptr) []inst {
 
 /* VM {{{ */
 
-// Simple recursive virtual machine based on the
+// recursiveVM; Simple recursive virtual machine based on the
 // "Regular Expression Matching: the Virtual Machine Approach" (https://swtch.com/~rsc/regexp/regexp2.html)
 func recursiveVM(src []byte, insts []inst, pc, sp int, ms ...*MatchData) (bool, int, *MatchData) {
 	var m *MatchData
